@@ -8,8 +8,8 @@
   <script type="x-shader/x-fragment" id="image">
     precision mediump float;
     #define SPIN_EASE 0.8
-    #define spin_time 5.
-    #define spin_amount 0.3
+    #define spin_time 100.
+    #define spin_amount 0.2
     #define contrast 3.
 
     #define PIXEL_SIZE_FAC 700.
@@ -25,14 +25,18 @@
 
     uniform vec2 iResolution;
     uniform float iTime;
+    uniform vec2 iMouse;
 
     void main( )
     {
       // uncomment to enable pixelated bg
-       //float pixel_size = length(iResolution.xy)/PIXEL_SIZE_FAC;
-      float pixel_size = 1.0;
+       float pixel_size = length(iResolution.xy)/PIXEL_SIZE_FAC;
+      //float pixel_size = 1.0;
       vec2 uv = (floor(gl_FragCoord.xy*(1./pixel_size))*pixel_size - 0.5*iResolution.xy)/length(iResolution.xy) - vec2(0.12, 0.);
-      
+
+
+
+
       float uv_len = length(uv);
       
       float speed = (spin_time*SPIN_EASE*0.2) + 302.2;
@@ -40,9 +44,11 @@
       
       vec2 mid = vec2(0.5, 0.5);
       uv = (vec2((uv_len * cos(new_pixel_angle) + mid.x), (uv_len * sin(new_pixel_angle) + mid.y)) - mid);
-      
+      uv += iMouse/iResolution;
+
+
       uv *= 30.;
-      speed = iTime*(2.);
+      speed = iTime*(20.);
       vec2 uv2 = vec2(uv.x+uv.y);
 
       for(int i=0; i < 5; i++) {
@@ -59,6 +65,7 @@
 
       // Output to screen
       gl_FragColor = (0.3/contrast)*colour_1 + (1. - 0.3/contrast)*(colour_1*c1p + colour_2*c2p + vec4(c3p*colour_3.rgb, c3p*colour_1.a));
+
     }
   </script>
 
@@ -67,16 +74,34 @@
 <body>
   <script>
     let t = 0;
+    let currPos = {x:10,y:0}
+    let truePos = {x:0,y:0}
+
+    window.addEventListener('mousemove', (e) => {
+
+      truePos.x = e.clientX;
+      truePos.y = e.clientY;
+    });
+
     requestAnimationFrame(function update() {
       t += 1/120;
       requestAnimationFrame(update);
+
+        currPos.x = currPos.x + (truePos.x - currPos.x) * 0.005;
+        currPos.y = currPos.y + (truePos.y - currPos.y) * 0.005;
+
     });
     shaderWebBackground.shade({
       shaders: {
         image: {
           uniforms: {
             iResolution: (gl, loc, ctx) => gl.uniform2f(loc, ctx.width, ctx.height),
-            iTime: (gl, loc, ctx) => gl.uniform1f(loc, t)
+            iTime: (gl, loc, ctx) => gl.uniform1f(loc, t),
+            iMouse: (gl, loc, ctx) => {
+
+              gl.uniform2fv(loc, [currPos.x, currPos.y]);
+
+            }
           }
         }
       }
