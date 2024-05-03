@@ -60,7 +60,7 @@ let rarities = {
   "Seal": "#4584fa",
   "Deck": "#9bb6bd",
   "Sticker": "#5d5dff",
-  "Boss Blind": "#5d5dff",
+  "Blind": "#5d5dff",
   "Showdown": "#4584fa",
 }
 
@@ -124,34 +124,19 @@ let add_cards_to_div = (jokers, jokers_div) => {
   }
 }
 
-// if (jokers.length === 0) {
-//   document.querySelector(".jokersfull").style.display = "none"
-// }
-// else {
-//     let jokers_div = document.querySelector(".jokers");
-//     add_cards_to_div(jokers, jokers_div);
-// }
 
 // add all catagoires in data
 for (let category in data) {
   let jokers = data[category];
-
-  // div template
-  //<div class="jokersfull">
-  //       <h2>jokers</h2>
-  //       <br>
-  //       <div class="jokers cards">
-  //
-  //       </div>
-  //       <br>
-  //     </div>
 
     let jokers_div = document.createElement("div");
     jokers_div.classList.add(category + "full");
     //add under "main" div
     document.querySelector("main").appendChild(jokers_div);
     let h2 = document.createElement("h2");
-    h2.innerText = category;
+    let capitalized = category.charAt(0).toUpperCase() + category.slice(1);
+
+    h2.innerText = capitalized;
     jokers_div.appendChild(h2);
     let br = document.createElement("br");
     jokers_div.appendChild(br);
