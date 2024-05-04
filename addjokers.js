@@ -134,9 +134,7 @@ for (let category in data) {
     //add under "main" div
     document.querySelector("main").appendChild(jokers_div);
     let h2 = document.createElement("h2");
-    let capitalized = category.charAt(0).toUpperCase() + category.slice(1);
-
-    h2.innerText = capitalized;
+    h2.innerText = category.charAt(0).toUpperCase() + category.slice(1);
     jokers_div.appendChild(h2);
     let br = document.createElement("br");
     jokers_div.appendChild(br);

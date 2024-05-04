@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mod name</title>
+  <title>Tetrapak</title>
   <script src="https://xemantic.github.io/shader-web-background/dist/shader-web-background.min.js"></script>
   <script type="x-shader/x-fragment" id="image">
     precision mediump float;
@@ -12,7 +12,7 @@
     #define spin_amount 0.2
     #define contrast 3.
 
-    #define PIXEL_SIZE_FAC 700.
+    #define PIXEL_SIZE_FAC 400.
 
     // default colours
     // #define colour_1 vec4(1.0,0.3725490196,0.3333333333,1.0)
@@ -44,11 +44,11 @@
       
       vec2 mid = vec2(0.5, 0.5);
       uv = (vec2((uv_len * cos(new_pixel_angle) + mid.x), (uv_len * sin(new_pixel_angle) + mid.y)) - mid);
-      uv += iMouse/iResolution;
+      uv += (iMouse/iResolution) - 0.5;
 
 
       uv *= 30.;
-      speed = iTime*(20.);
+      speed = iTime*(2.);
       vec2 uv2 = vec2(uv.x+uv.y);
 
       for(int i=0; i < 5; i++) {
@@ -74,7 +74,11 @@
 <body>
   <script>
     let t = 0;
-    let currPos = {x:10,y:0}
+    let currPos = {
+      x: window.screen.availWidth/2,
+      y: window.screen.availHeight/2
+    }
+
     let truePos = {x:0,y:0}
 
     window.addEventListener('mousemove', (e) => {
@@ -87,8 +91,8 @@
       t += 1/120;
       requestAnimationFrame(update);
 
-        currPos.x = currPos.x + (truePos.x - currPos.x) * 0.005;
-        currPos.y = currPos.y + (truePos.y - currPos.y) * 0.005;
+        currPos.x = currPos.x + (truePos.x - currPos.x) * 0.0005;
+        currPos.y = currPos.y + (truePos.y - currPos.y) * 0.0005;
 
     });
     shaderWebBackground.shade({
