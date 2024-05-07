@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5c6e802-35fa-40c0-b843-e139ce07daec" name="Changes" comment="rename?">
-      <change beforePath="$PROJECT_DIR$/.idea/TetrapakWebsite.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TetrapakWebsite.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addjokers.js" beforeDir="false" afterPath="$PROJECT_DIR$/addjokers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +48,7 @@
       <updated>1714790827925</updated>
       <workItem from="1714790829028" duration="711000" />
       <workItem from="1714791549107" duration="737000" />
+      <workItem from="1715106724538" duration="378000" />
     </task>
     <task id="LOCAL-00001" summary="rename?">
       <option name="closed" value="true" />
